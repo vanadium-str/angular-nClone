@@ -1,0 +1,22 @@
+<div class="flex justify-between items-center mx-20 mb-5 h-20">
+    <div class="text-violet-700 text-3xl italic font-semibold">
+        nClone App
+    </div>
+    <div 
+        class="text-violet-700 cursor-pointer"
+        (click)="showModal = true"
+    >Add link</div>
+</div>
+<div class="ml-20">
+    <app-post-view 
+        *ngFor="let post of posts; let i = index"
+        [index]="i"
+        [post]="post"   
+    >
+    </app-post-view>
+</div>
+<app-add-post
+    *ngIf="showModal"
+    [showModal]="showModal"
+    (hideModal)="hideModal($event)"
+></app-add-post>

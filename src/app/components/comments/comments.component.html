@@ -1,0 +1,26 @@
+<div class="flex flex-row mb-3">
+    <div class="mr-10 flex flex-col items-center justify-center">
+        <fa-icon
+            [icon]="faArrowUp"
+            class="cursor-pointer"
+            (click)="increaseVotes()"
+        ></fa-icon>
+        {{ votesAmount }}
+        <fa-icon
+            [icon]="faArrowDown"
+            class="cursor-pointer"
+            (click)="decreaseVotes()"
+        ></fa-icon>
+    </div>
+    <div>
+        <p class="w-96 mb-1">
+            {{ comment.comment }}
+        </p>
+        <p class="text-sm text-gray-500">
+            submitted on {{ date }} by <b>{{ comment.author }}</b>
+        </p>
+        <p class="text-sm font-bold text-gray-500 cursor-pointer">
+            {{ comment.amountComments }} comments
+        </p>
+    </div>
+</div>

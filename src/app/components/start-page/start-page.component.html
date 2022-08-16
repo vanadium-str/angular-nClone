@@ -1,0 +1,30 @@
+<div class="flex justify-center items-center flex-col">
+    <p class="text-violet-700 text-4xl italic font-semibold h-72 flex items-end mb-10">
+        nClone App
+    </p>
+    <form
+        class="flex flex-col"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit(form.value)"
+    >
+        <label class="mb-3 text-sm">
+            Please, write your username:
+        </label>
+        <input 
+            class="rounded-md border border-black w-40"
+            type="text"
+            placeholder="username"
+            formControlName="username"
+            appFocus
+        />
+        <p class="text-red-600 text-sm mt-2" *ngIf="showError">
+            This is a required field
+        </p>
+        <button
+            type="submit"
+            class="mt-5 border-white rounded-xl bg-violet-700 w-40 h-10 text-white"
+        >
+            Sign in
+        </button>
+    </form>
+</div>
