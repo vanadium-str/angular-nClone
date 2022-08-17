@@ -1,4 +1,4 @@
-<div class="flex items-center my-5 grid grid-rows">
+<div class="my-5 grid grid-rows">
     <div class="flex flex-row">
         <div class="mr-10 flex flex-col items-center">
             <fa-icon
@@ -30,12 +30,20 @@
             <p class="text-sm text-gray-500">
                 submitted on {{ date }} by <b>{{ post.username }}</b>
             </p>
-            <p
-                class="text-sm font-bold text-gray-500 cursor-pointer"
-                (click)="showComments = !showComments"
-            >
-                {{ post.comments.length }} comments
-            </p>
+            <div class="flex justify-between mt-1 w-80">
+                <p
+                    class="text-sm font-bold text-gray-500 cursor-pointer"
+                    (click)="showComments = !showComments"
+                >
+                    {{ post.comments.length }} comments
+                </p>
+                <button
+                    class="border-white rounded-md bg-gray-400 w-28 h-6 text-white flex items-center justify-center"
+                    (click)="addComment = true"
+                >
+                    Add comment
+                </button>
+            </div>
         </div>
 </div>
     <div
@@ -55,3 +63,9 @@
     [showPost]="showPost"
     (hidePost)="hidePost($event)"
 ></app-modal>
+<app-add-comment
+    *ngIf="addComment"
+    [index]="index"
+    [addComment]="addComment"
+    (closeComment)="closeComment($event)"
+></app-add-comment>

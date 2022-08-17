@@ -14,6 +14,7 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { FocusDirective } from './directives/focus.directive';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 const routes: Routes = [
   {path: 'home', component: StartPageComponent},
@@ -30,7 +31,8 @@ const routes: Routes = [
     PostViewComponent,
     FocusDirective,
     AddPostComponent,
-    CommentsComponent
+    CommentsComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@ export class AddPostComponent implements OnInit {
 
   constructor(
     private sanitization: DomSanitizer,
-    public tempService: TempService,
+    private tempService: TempService,
     private dateFormattingService: DateFormattingService
   ) {}
 
@@ -38,8 +38,7 @@ export class AddPostComponent implements OnInit {
   }
   
   onSubmit(value: any){
-    this.date = this.dateFormattingService.createDate();  
-    console.log(this.date);
+    this.date = this.dateFormattingService.createDate();
       
     if(value.title !== '' && this.addedImg !== ''){
       this.newPost = {

@@ -21,7 +21,9 @@
         <p
             class="text-red-600 text-sm mt-2"
             *ngIf="showErrorTitle"
-        >This is a required field</p>
+        >
+            This is a required field
+        </p>
 
         <label class="mb-3 text-sm mt-5">
             Please, attach an image (supported: .jpg/.jpeg/.png):
@@ -47,10 +49,10 @@
         <div>
             <button
                 type="submit"
-                class="mt-5 mr-5 border-white rounded-xl bg-violet-700 w-40 h-10 text-white"
+                class="mt-10 mr-5 border-white rounded-xl bg-violet-700 w-40 h-10 text-white"
             >Add</button>
             <button
-                class="mt-5 border-white rounded-xl bg-gray-400 w-40 h-10 text-white"
+                class="mt-10 border-white rounded-xl bg-gray-400 w-40 h-10 text-white"
                 (click)="hideModal.emit(false)"
             >Back</button>
         </div>

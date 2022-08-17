@@ -19,6 +19,7 @@ export class PostViewComponent implements OnInit {
   date: string;
   showComments = false;
   showPost = false;
+  addComment = false;
 
   ngOnInit(): void {
       this.votesAmount = this.post.amountVotes;
@@ -39,4 +40,8 @@ export class PostViewComponent implements OnInit {
   hidePost(hide: boolean){
       this.showPost = hide;
   }
+
+  closeComment(hide: boolean){
+    this.addComment = hide;
+}
 }
