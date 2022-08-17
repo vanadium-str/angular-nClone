@@ -4,13 +4,13 @@ export interface IPost{
     title: string,
     amountVotes: number,
     date_time: string,
-    comments: any[]
+    comments: IComments[]
 }
 
-// export interface IComments{
-//     comment: string,
-//     author: string,
-//     amountVotes: number,
-//     date_time: string,
-//     amountComments: number
-// }
+export interface IComments{
+    comment: string,
+    author: string,
+    amountVotes: number,
+    date_time: string,
+    amountComments: number
+}
