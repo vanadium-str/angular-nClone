@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 import { postsArray } from 'src/app/data/postsArray';
 import { IPost } from 'src/app/models/post';
 import { DateFormattingService } from 'src/app/services/date-formatting.service';
 import { TempService } from 'src/app/services/temp.service';
+import { AddPost } from 'src/app/store/actions/modal-windows.actions';
 
 @Component({
   selector: 'app-add-post',
@@ -13,13 +15,11 @@ import { TempService } from 'src/app/services/temp.service';
 })
 export class AddPostComponent implements OnInit {
 
-  @Input() showModal: boolean
-  @Output() hideModal = new EventEmitter<boolean>();
-
   constructor(
     private sanitization: DomSanitizer,
     private tempService: TempService,
-    private dateFormattingService: DateFormattingService
+    private dateFormattingService: DateFormattingService,
+    private store: Store
   ) {}
 
   form = new FormGroup({
@@ -36,7 +36,11 @@ export class AddPostComponent implements OnInit {
   img(event: any){
     this.addedImg = this.sanitization.bypassSecurityTrustUrl(window.URL.createObjectURL(event.target.files[0])) 
   }
-  
+
+  closeAddPost(){
+    this.store.dispatch(new AddPost);
+  }
+
   onSubmit(value: any){
     this.date = this.dateFormattingService.createDate();
       
@@ -50,7 +54,7 @@ export class AddPostComponent implements OnInit {
         comments: []
       }
       postsArray.unshift(this.newPost);
-      this.hideModal.emit(false);
+      this.closeAddPost();
     }else if(value.title === ''){
       this.showErrorTitle = true;
     }else if(this.addedImg === ''){

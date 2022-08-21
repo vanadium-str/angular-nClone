@@ -1,8 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { postsArray } from 'src/app/data/postsArray';
+//import { addComment } from 'src/app/reducers/modal-windows';
 import { DateFormattingService } from 'src/app/services/date-formatting.service';
 import { TempService } from 'src/app/services/temp.service';
+import { AddComment } from 'src/app/store/actions/modal-windows.actions';
+import { setUsernameSelector } from "../../store/selectors/username.selectors";
 
 @Component({
   selector: 'app-add-comment',
@@ -12,8 +16,6 @@ import { TempService } from 'src/app/services/temp.service';
 export class AddCommentComponent implements OnInit {
 
   @Input() index: number
-  @Input() addComment: boolean
-  @Output() closeComment = new EventEmitter<boolean>();
 
   showError = false;
   date: string;
@@ -21,7 +23,8 @@ export class AddCommentComponent implements OnInit {
 
   constructor(
     private tempService: TempService,
-    private dateFormattingService: DateFormattingService
+    private dateFormattingService: DateFormattingService,
+    private store: Store
   ) { }
 
   form = new FormGroup({
@@ -30,6 +33,7 @@ export class AddCommentComponent implements OnInit {
 
   onSubmit(value: any){
     this.date = this.dateFormattingService.createDate();
+    
     if(value.comment !== ''){
       this.comment = {
         comment: value.comment,
@@ -39,13 +43,17 @@ export class AddCommentComponent implements OnInit {
         amountComments: 0
       }
       postsArray[this.index].comments.push(this.comment);
-      this.closeComment.emit(false);
+      this.closeComment()
     }else{
       this.showError = true;
     }
   }
 
   ngOnInit(): void {
+  }
+
+  closeComment(){
+    this.store.dispatch(new AddComment)
   }
 
 }

@@ -23,12 +23,12 @@
         <div>
             <h4
                 class="text-2xl cursor-pointer"
-                (click)="showPost = true"
+                (click)="showPost(); setIndex(index)"
             >
                 {{ post.title }}
             </h4>
             <p class="text-sm text-gray-500">
-                submitted on {{ date }} by <b>{{ post.username }}</b>
+                submitted on {{ this.post.date_time | date: "dd/mm/yyyy HH:mm:ss" }} by <b>{{ post.username }}</b>
             </p>
             <div class="flex justify-between mt-1 w-80">
                 <p
@@ -39,15 +39,16 @@
                 </p>
                 <button
                     class="border-white rounded-md bg-gray-400 w-28 h-6 text-white flex items-center justify-center"
-                    (click)="addComment = true"
+                    (click)="showAddComment()"
                 >
                     Add comment
                 </button>
             </div>
         </div>
 </div>
+<div>
     <div
-        *ngIf="showComments && post.comments.length"
+        *ngIf="post.comments.length && showComments"
         class="ml-28 mt-2"
     >
         <app-comments
@@ -57,15 +58,9 @@
     </div>
 </div>
 <app-modal
-    *ngIf="showPost"
-    [index]="index"
-    [post]="post"
-    [showPost]="showPost"
-    (hidePost)="hidePost($event)"
+    *ngIf="showPost$| async"
 ></app-modal>
 <app-add-comment
-    *ngIf="addComment"
+    *ngIf="showAddComment$ | async"
     [index]="index"
-    [addComment]="addComment"
-    (closeComment)="closeComment($event)"
 ></app-add-comment>

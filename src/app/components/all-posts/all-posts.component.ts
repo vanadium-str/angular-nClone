@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { IPost } from "src/app/models/post";
-import { postsArray } from "src/app/data/postsArray";
+import { PostServise } from "src/app/services/posts.service";
+import { GetPosts } from "src/app/store/actions/get-posts.actions";
+import { AddPost } from "src/app/store/actions/modal-windows.actions";
+import { getPostsSelector } from "src/app/store/selectors/get-posts.selectors";
+import { showAddPostSelector } from "src/app/store/selectors/modal-windows.selectors";
 
 @Component({
     selector: 'all-posts',
@@ -10,13 +15,25 @@ import { postsArray } from "src/app/data/postsArray";
 
 export class AllPostsComponent implements OnInit{
 
-    posts: IPost[] = postsArray;
-    showModal = false;
+   // posts: IPost[];
 
-    hideModal(hide: boolean){
-        this.showModal = hide;
+    showAddPost$ = this.store.select(showAddPostSelector);
+
+    showAddPost(){
+        this.store.dispatch(new AddPost);
     }
 
-    ngOnInit(): void {   
+    posts$ = this.store.select(getPostsSelector);
+
+    ngOnInit(): void {
+        // this.postService.getData().subscribe((posts) => {
+        //     this.posts = posts;
+        // })  
+        this.store.dispatch(new GetPosts);
     }
+
+    constructor(
+        private postService: PostServise,
+        private store: Store
+    ){}
 }

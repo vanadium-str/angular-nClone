@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TempService } from 'src/app/services/temp.service';
+import { SetUsername } from 'src/app/store/actions/username.actions';
 
 @Component({
   selector: 'app-start-page',
@@ -11,17 +13,10 @@ import { TempService } from 'src/app/services/temp.service';
 export class StartPageComponent implements OnInit {
 
   constructor(
-    //private formBuilder: FormBuilder,
     private tempService: TempService,
-    private router: Router
-  ){
-    // this.usernameForm = this.formBuilder.group({
-    //   username: new FormControl<string>('', [
-    //     Validators.required,
-    //     Validators.minLength(4)
-    //   ]),
-    // })
-  }
+    private router: Router,
+    private store: Store
+  ){}
 
   form = new FormGroup({
     username: new FormControl<string>(''),
@@ -30,9 +25,8 @@ export class StartPageComponent implements OnInit {
   showError = false;
 
   onSubmit(value: any){
-    console.log(value.username);
+    this.store.dispatch(new SetUsername(value));
     this.tempService.changeUsername(value.username);
-    console.log(this.tempService.getUserName());
     if(value.username === ''){
       this.showError = true;
     }else{

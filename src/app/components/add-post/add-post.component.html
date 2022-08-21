@@ -1,6 +1,6 @@
 <div 
     class="bg-black/50 fixed top-0 left-0 bottom-0 w-screen h-screen"
-    (click)="hideModal.emit(false)"
+    (click)="closeAddPost()"
 ></div>
 
 <div class="absolute bg-white flex flex-col w-10/12 h-5/6 top-10 left-20 overflow-auto justify-center items-center">
@@ -53,7 +53,7 @@
             >Add</button>
             <button
                 class="mt-10 border-white rounded-xl bg-gray-400 w-40 h-10 text-white"
-                (click)="hideModal.emit(false)"
+                (click)="closeAddPost()"
             >Back</button>
         </div>
     </form>

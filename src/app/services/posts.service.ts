@@ -8,11 +8,9 @@ import { IPost } from "../models/post";
 })
 
 export class PostServise{
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient){}
         
+    getData(): Observable<IPost[]>{
+        return this.http.get<IPost[]>('https://my-json-server.typicode.com/vanadium-str/fakeJSON/data')
     }
-        
-    // getData(): Observable<IProduct>{
-    //     return this.http.get<IProduct>('/utils/data.json')
-    // }
 }

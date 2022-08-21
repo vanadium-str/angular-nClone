@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AllPostsComponent } from './components/all-posts/all-posts.component';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +13,12 @@ import { FocusDirective } from './directives/focus.directive';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store';
+import { GetPostsEffects } from './store/effects/get-posts.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,10 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([GetPostsEffects]),
+    StoreModule.forRoot(appReducers)
   ],
   providers: [],
   bootstrap: [AppComponent]
