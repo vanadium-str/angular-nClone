@@ -43,7 +43,7 @@ export class AddPostComponent implements OnInit {
 
   onSubmit(value: any){
     this.date = this.dateFormattingService.createDate();
-      
+    
     if(value.title !== '' && this.addedImg !== ''){
       this.newPost = {
         username: this.tempService.getUserName(),

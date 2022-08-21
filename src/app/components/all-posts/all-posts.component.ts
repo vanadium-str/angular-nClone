@@ -30,6 +30,7 @@ export class AllPostsComponent implements OnInit{
         //     this.posts = posts;
         // })  
         this.store.dispatch(new GetPosts);
+        this.posts$.subscribe((p) => {console.log(p)});
     }
 
     constructor(
